@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from trapezoid_integration import trapezoid_integral, f
+from trapezoid_integration import trapezoid_integral, f 
 
 class TestTrapezoidIntegration(unittest.TestCase):
     def test_integration(self):
@@ -10,13 +10,8 @@ class TestTrapezoidIntegration(unittest.TestCase):
         for N in N_values:
             pi_approx = trapezoid_integral(f, 0, 1, N)
             rms_error = np.sqrt((pi_approx - pi_reference) ** 2)
+            self.assertAlmostEqual(pi_approx, pi_reference, places=4)
             print(f"N: {N}, Pi Approximation: {pi_approx}, RMS Error: {rms_error}")
-            
-            # Use a less stringent condition for smaller N
-            if N <= 100:
-                self.assertAlmostEqual(pi_approx, pi_reference, places=2)
-            else:
-                self.assertAlmostEqual(pi_approx, pi_reference, places=4)
 
 if __name__ == "__main__":
     unittest.main()
